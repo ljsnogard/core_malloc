@@ -4,7 +4,7 @@ use alloc::alloc::{alloc, dealloc};
 
 use core::{
     alloc::Layout,
-    fmt,
+    error, fmt,
     ptr::{self, NonNull},
 };
 
@@ -20,6 +20,8 @@ impl fmt::Display for CoreAllocError {
         write!(f, "alloc returns null pointer.")
     }
 }
+
+impl error::Error for CoreAllocError {}
 
 /// A wrapper for `alloc::alloc` and `alloc::dealloc`
 #[derive(Debug, Default, Clone, Copy)]
